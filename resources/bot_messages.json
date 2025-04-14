@@ -1,0 +1,109 @@
+{
+    "welcome": {
+        "en": "Hi, I can animate your photos based on a reference video.\n\nJust send a photo with the face you want to animate. The quality of the result depends on the quality of the photo and how well you can see the face on it. Then I will ask you to send a video (you can record a circle video or send a video file).\nIn response you will get an animated face that speaks like in your video.\n\nHope you like it! ❤️\n\nYou can change the language of communication by calling /set_lang.",
+        "de": "Hallo, ich kann deine Fotos auf der Grundlage eines Referenzvideos animieren.\n\nSchicke mir einfach ein Foto mit dem Gesicht, das du animieren möchtest. Die Qualität des Ergebnisses hängt von der Qualität des Fotos ab und davon, wie gut du das Gesicht darauf erkennen kanst. Dann bitte ich dich, ein Video zu schicken (du kannst einen Kreis aufnehmen oder eine Videodatei schicken). Als Antwort erhältst du ein animiertes Gesicht, das wie in deinem Video spricht.\n\nHoffentlich gefällt es dir❤️\n\nDu kannst die Kommunikationssprache durch den Aufruf von /set_lang ändern.",
+        "ru": "Привет! Я могу анимировать твои фотографии на основе референсного видео.\n\nПросто отправь фото с лицом, которое ты хочешь оживить. Качество результата очень зависит от качества фото и того насколько хорошо на нём видно лицо. После я попрошу отправить видео (можно записать кружочек или отправить видео-файл).\nВ ответ ты получишь анимированное лицо, которое говорит как на твоём видео.\n\nНадеюсь, тебе понравится❤️\n\nТы можешь изменить язык общения, вызвав команду /set_lang."
+    },
+    "choose_lang": {
+        "en": "Choose one of the suggested languages for communication:",
+        "de": "Wähle eine der vorgeschlagenen Sprachen zur Kommunikation:",
+        "ru": "Выбери один из предложенных языков общения:"
+    },
+    "lang_is_set": {
+        "en": "Starting now, the default language is set to {lang}. You can choose a different language using the /set_lang command.",
+        "de": "Ab jetzt ist die Standardsprache auf {lang} eingestellt. Du kannst eine andere Sprache mit dem Befehl /set_lang auswählen.",
+        "ru": "С этого момента язык по умолчанию — {lang}. Ты можешь выбрать другой язык, вызвав команду /set_lang."
+    },
+    "access_denied": {
+        "en": "You don’t have permission to use this bot.",
+        "de": "Du hast keinen Zugriff auf diesen Bot.",
+        "ru": "У тебя нет доступа к этому боту."
+    },
+    "not_authorized": {
+        "en": "You don’t have permission to use this command.",
+        "de": "Du hast keine Berechtigung, diesen Befehl zu nutzen.",
+        "ru": "У тебя нет прав для использования этой команды."
+    },
+
+    "unsupported_file_type": {
+        "en": "I can't process this format, try sending another file or /cancel.",
+        "de": "Ich kann dieses Format nicht verarbeiten, versuchen Sie, eine andere Datei zu senden oder /cancel.",
+        "ru": "Я не могу использовать этот формат файла, попробуй отправить другой или нажми отмену /cancel."
+    },
+    "got_img": {
+        "en": "Cool! Now send me a reference video. Minimize shoulder movement and make sure the first frame of reference video is a frontal face with neutral expression.",
+        "de": "Super! Schicken Sie mir jetzt ein Referenzvideo. Minimieren Sie Schulterbewegungen und stellen Sie sicher, dass das erste Bild des Referenzvideos ein frontales Gesicht mit neutralem Ausdruck ist.",
+        "ru": "Круто! Теперь пришли мне видео референс. Сведи к минимуму движение плеч и убедись, что первый кадр видео - это фронтальное лицо с нейтральным выражением."
+    },
+    "no_img": {
+        "en": "Can't find reference image, please send it again.",
+        "de": "Ich kann das Referenzbild nicht finden, bitte schick es noch einmal.",
+        "ru": "Не могу найти исходное фото, отправь его пожалуйста снова."
+    },
+    "long_video": {
+        "en": "Video is too long. Max allowed duration is {max_duration} sec., send again or /cancel.",
+        "de": "Das Video ist zu lang. Maximal zulässige Dauer ist {max_duration} sec, erneut senden oder /cancel.",
+        "ru": "Видео слишком длинное. Максимально допустимая продолжительность - {max_duration} сек., отправь еще раз или /cancel."
+    },
+    "got_video": {
+        "en": "Cool! Now please wait a little while I'm doing my magic✨",
+        "de": "Super! Jetzt warte bitte ein bisschen, während ich zaubere✨",
+        "ru": "Круто! А теперь, пожалуйста, подожди немного, пока я делаю свою магию✨"
+    },
+    "generation_failed": {
+        "en": "Failed to generate animation😞",
+        "de": "Animation konnte nicht erzeugt werden😞",
+        "ru": "Не удалось сгенерировать анимацию😞"
+    },
+    "send_video": {
+        "en": "Here's your animation🤗\nIf you want to generate a new video, just send a photo to chat.",
+        "de": "Hier ist deine Animation🤗\nWenn du ein neues Video erstellen möchtest, schicke einfach ein Foto an den Chat.",
+        "ru": "Вот твоя анимация🤗\nЕсли хочешь сгенерировать новое видео, просто отправь в чат фото."
+    },
+
+    "add_user": {
+        "en": "Use `/add_user username` to proceed.",
+        "de": "Verwende `/add_user username`, um fortzufahren.",
+        "ru": "Воспользуйся командой `/add_user username`."
+    },
+    "add_admin": {
+        "en": "Use `/add_admin username` to proceed.",
+        "de": "Verwende `/add_admin username`, um fortzufahren.",
+        "ru": "Воспользуйся командой `/add_admin username`."
+    },
+    "user_added": {
+        "en": "User {username} has been added to the allowed list.",
+        "de": "Mitglied {username} wurde zur Freigabeliste hinzugefügt.",
+        "ru": "Пользователь {username} добавлен в белый список."
+    },
+    "user_exists": {
+        "en": "User {username} is already on the allowed list.",
+        "de": "Mitglied {username} ist bereits auf der Freigabeliste.",
+        "ru": "Пользователь {username} уже находится в списке."
+    },
+    "show_users": {
+        "en": "Here’s the current list of users:\n\n{users}",
+        "de": "Dies ist die aktuelle Liste der Mitglieder:\n\n{users}",
+        "ru": "Вот актуальный список пользователей:\n\n{users}"
+    },
+    "specify_username": {
+        "en": "Please provide the username to remove.",
+        "de": "Bitte gib den Benutzernamen an, der entfernt werden soll.",
+        "ru": "Укажи имя пользователя для удаления."
+    },
+    "user_removed": {
+        "en": "User {username} was removed from the allowed list.",
+        "de": "Mitglied {username} wurde aus der Freigabeliste entfernt.",
+        "ru": "Пользователь {username} удалён из списка."
+    },
+    "user_not_found": {
+        "en": "User {username} isn’t on the allowed list.",
+        "de": "Mitglied {username} befindet sich nicht auf der Freigabeliste.",
+        "ru": "Пользователя {username} нет в списке."
+    },
+    "cancel": {
+        "en": "Action canceled. Use /start to start over.",
+        "de": "Vorgang abgebrochen. Nutze /start, um neu zu starten.",
+        "ru": "Действие отменено. Используй /start, чтобы начать заново."
+    }
+}
