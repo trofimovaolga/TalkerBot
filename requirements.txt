@@ -1,2 +1,4 @@
 dotenv==0.9.9
 python-telegram-bot==22.0
+TTS==0.22.0
+pydub==0.25.1

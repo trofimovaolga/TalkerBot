@@ -4,8 +4,8 @@ from telegram import Update
 from telegram.ext import CallbackContext, ConversationHandler
 
 from bot.bot_manager import BotManager
-from config import uploads_path, max_duration, ADD_DRIVING_VIDEO, cleanup_animations
-from utils.media_utils import get_center_crop, generate_video
+from config import uploads_path, max_duration, ADD_DRIVING_VIDEO, ADD_VOICE, cleanup_animations, custom_voice_filename
+from utils.media_utils import get_center_crop, generate_video, convert_to_wav, replace_voice_with_ffmpeg
 
 
 
@@ -23,6 +23,11 @@ async def add_ref_image_handler(update: Update, context: CallbackContext) -> int
     username = update.effective_user.username
     manager = BotManager()
     lang = manager.get_user_language(username)
+
+    if not manager.is_allowed_user(username):
+        manager.logger.warning(f'{username} tried issuing a command but was not allowed.')
+        await update.message.reply_text(manager.get_message("access_denied"))
+        return ConversationHandler.END
 
     if update.message.photo:
         file_content = await update.message.photo[-1].get_file()
@@ -108,6 +113,24 @@ async def add_driving_video_handler(update: Update, context: CallbackContext) ->
         else:
             animation_path = result["path"]
 
+        # Voice settings
+        cur_voice = manager.get_user_voice(username)
+        if cur_voice != "orig":
+            target_voice = os.path.join("./resources", cur_voice + ".wav") if "male" in cur_voice else os.path.join(uploads_path, username, custom_voice_filename)
+            message = manager.get_message("wait_audio_convertion", lang)
+            await update.message.reply_text(message)
+            new_video_path = replace_voice_with_ffmpeg(
+                video_path=animation_path, 
+                target_voice=target_voice, 
+                username=username
+            )
+            if not new_video_path:
+                message = manager.get_message("failed_audio_convertion", lang)
+                await update.message.reply_text(message)
+            else:
+                animation_path = new_video_path
+
+
         with open(animation_path, 'rb') as video:
             await update.message.reply_video_note(video)
         message = manager.get_message("send_video", lang)
@@ -140,3 +163,70 @@ async def cancel_handler(update: Update, context: CallbackContext) -> int:
     message = manager.get_message('cancel', lang)
     await update.message.reply_text(message)
     return ConversationHandler.END
+
+
+async def ask_voice_handler(update: Update, context: CallbackContext) -> int:
+    username = update.effective_user.username
+
+    manager = BotManager()
+    lang = manager.get_user_language(username)
+
+    if not manager.is_allowed_user(username):
+        manager.logger.warning(f'{username} tried issuing a command but was not allowed.')
+        await update.message.reply_text(manager.get_message("access_denied"))
+        return ConversationHandler.END
+    
+    message = manager.get_message('send_voice', lang)
+    await update.message.reply_text(message)
+    return ADD_VOICE
+
+
+async def add_voice_handler(update: Update, context: CallbackContext) -> int:
+    username = update.effective_user.username
+    manager = BotManager()
+    lang = manager.get_user_language(username)
+
+    if update.message.voice:
+        manager.logger.debug('Got voice')
+        file_content = await update.message.voice.get_file()
+        file_name = os.path.basename(file_content.file_path)
+    elif update.message.audio:
+        manager.logger.debug('Got audio')
+        file_content = await update.message.audio.get_file()
+        file_name = os.path.basename(file_content.file_path)
+    elif update.message.document and 'audio' in update.message.document.mime_type:
+        manager.logger.debug('Got audio doc')
+        file_content = await update.message.document.get_file()
+        file_name = os.path.basename(file_content.file_path)
+    else:
+        manager.logger.debug(f'Unsupported format: {update.message=}')
+        message = manager.get_message("unsupported_file_type", lang)
+        await update.message.reply_text(message)
+        return ADD_VOICE
+
+    file_path = os.path.join(uploads_path, username, file_name)
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+    
+    try:
+        await file_content.download_to_drive(file_path)
+        wav_file = convert_to_wav(file_path)
+        if wav_file.get('error', None):
+            manager.logger.error(f"File {file_path} from {username} was not converted to wav.")
+        else:
+            manager.logger.info(f'Removing audio file {file_path}')
+            os.remove(file_path)
+            file_path = wav_file.get('path')
+        
+        manager.logger.info(f'File from {username} temporarily loaded to {file_path}.')
+
+        manager.set_user_voice(username, custom_voice_filename)
+        manager.logger.info(f"{username} set custom {file_path} voice.")
+        message = manager.get_message('voice_is_set', lang)
+        await update.message.reply_text(message)
+        return ConversationHandler.END
+
+    except Exception as e:
+        message = manager.get_message('file_failed', lang).format(e=e)
+        await update.message.reply_text(message)
+        manager.logger.error(f"File processing failed: {e}")
+        return ConversationHandler.END

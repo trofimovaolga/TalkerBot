@@ -27,13 +27,14 @@ class BotManager:
             CREATE TABLE IF NOT EXISTS users (
                 username TEXT PRIMARY KEY,
                 language TEXT NOT NULL DEFAULT 'en',
+                voice TEXT NOT NULL DEFAULT 'orig',
                 is_admin INTEGER DEFAULT 0
             )
         """)
 
         self.cursor.execute("SELECT username FROM users WHERE username = ?", (self.default_admin,))
         if self.cursor.fetchone() is None:  # Only add if not already present
-            self.cursor.execute("INSERT INTO users (username, language, is_admin) VALUES (?, ?, ?)", (self.default_admin, 'en', 1))
+            self.cursor.execute("INSERT INTO users (username, language, voice, is_admin) VALUES (?, ?, ?, ?)", (self.default_admin, 'en', 'orig', 1))
 
         self.conn.commit()
 
@@ -78,6 +79,37 @@ class BotManager:
         """, (username,))
         result = self.cursor.fetchone()
         return result[0] if result else 'en'
+    
+
+    def set_user_voice(self, username: str, voice: str) -> bool:
+        """
+        Set user's voice preference.
+        Args:
+            username: Telegram user ID.
+            lang: Language key ('orig', 'male', 'female', 'custom').
+        Returns:
+            bool: True if successful, False if language is unsupported.
+        """
+        self.cursor.execute("""
+            UPDATE users SET voice = ? WHERE username = ?
+        """, (voice, username))
+        self.conn.commit()
+        return True
+
+
+    def get_user_voice(self, username: str) -> str:
+        """
+        Get user's preferred voice, default is 'orig'.
+        Args:
+            username: Telegram username.
+        Returns:
+            str: Voice key ('orig', 'male', 'female', 'custom').
+        """
+        self.cursor.execute("""
+            SELECT voice FROM users WHERE username = ?
+        """, (username,))
+        result = self.cursor.fetchone()
+        return result[0] if result else 'orig'
 
 
     def get_message(self, message_key: str, lang: str = "en") -> str:
@@ -118,7 +150,7 @@ class BotManager:
     def add_user(self, username: str, is_admin: int = 0) -> None:
         """Add a user to the allowed list (or update, admin only)."""
         username = username.replace("@", "")
-        self.cursor.execute("INSERT OR REPLACE INTO users (username, language, is_admin) VALUES (?, ?, ?)", (username, 'en', is_admin))
+        self.cursor.execute("INSERT OR REPLACE INTO users (username, language, voice, is_admin) VALUES (?, ?, ?, ?)", (username, 'en', 'orig', is_admin))
         self.conn.commit()
 
 
@@ -131,6 +163,6 @@ class BotManager:
 
     def list_users(self) -> list:
         """Return a list of all users and their roles (admin only)."""
-        self.cursor.execute("SELECT username, language, is_admin FROM users")
+        self.cursor.execute("SELECT username, language, voice, is_admin FROM users")
         users = self.cursor.fetchall()
         return users

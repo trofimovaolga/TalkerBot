@@ -136,7 +136,7 @@ async def show_users(update: Update, context: CallbackContext) -> None:
     if not manager.is_admin(username):
         message = manager.get_message('not_authorized', lang)
     else:
-        users_list = [f"{i+1}. @{e[0].replace('@', '')}, lang: {e[1]}, is admin: {e[2]}" for i, e in enumerate(manager.list_users())]
+        users_list = [f"{i+1}. @{e[0].replace('@', '')}, lang: {e[1]}, voice: {e[2]}, is admin: {e[3]}" for i, e in enumerate(manager.list_users())]
         users_list = sorted(users_list, key=lambda x: x[0])
         users_list = '\n'.join(users_list)
         message = manager.get_message('show_users', lang).format(users=users_list)

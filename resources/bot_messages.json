@@ -14,6 +14,11 @@
         "de": "Ab jetzt ist die Standardsprache auf {lang} eingestellt. Du kannst eine andere Sprache mit dem Befehl /set_lang auswählen.",
         "ru": "С этого момента язык по умолчанию — {lang}. Ты можешь выбрать другой язык, вызвав команду /set_lang."
     },
+    "voice_is_set": {
+        "en": "From now on, the animations will use the voice you selected. You can select a different voice by invoking the command /set_voice.",
+        "de": "Von nun an verwenden die Animationen die von dir ausgewählte Stimme. Du kannst eine andere Stimme auswählen, indem du den Befehl /set_voice wählen.",
+        "ru": "С этого момента в анимациях будет использоваться выбранный тобой голос. Ты можешь выбрать другой голос, вызвав команду /set_voice."
+    },
     "access_denied": {
         "en": "You don’t have permission to use this bot.",
         "de": "Du hast keinen Zugriff auf diesen Bot.",
@@ -24,7 +29,46 @@
         "de": "Du hast keine Berechtigung, diesen Befehl zu nutzen.",
         "ru": "У тебя нет прав для использования этой команды."
     },
-
+    "choose_voice": {
+        "en": "Choose the voice for animations from the list or upload a new custom voice by calling /upload_voice",
+        "de": "Wahl der Stimme für Animationen aus der Liste oder Hochladen einer neuen benutzerdefinierten Stimme durch Aufruf von /upload_voice",
+        "ru": "Выбери голос для анимаций из списка или загрузи новый голос, вызвав команду /upload_voice"
+    },
+    "send_voice": {
+        "en": "Send me an audio file or record a voice message.\nPlease note that too short, too quiet, noisy or bad quality audio will cause bad results",
+        "de": "Schicke mir eine Audiodatei oder nimm eine Sprachnachricht auf.\nBitte beachte, dass zu kurze, zu leise, unklare oder schlechte Audioqualität zu schlechten Ergebnissen führt",
+        "ru": "Отправь аудиофайл или запиши голосовое сообщение.\nВажно помнить, что слишком короткий, тихий, шумный или некачественный звук приведет к плохим результатам"
+    },
+    "wait_audio_convertion": {
+        "en": "Your animation is almost ready, converting the voice, just a sec",
+        "de": "Deine Animation ist fast fertig, die Umwandlung der Stimme, nur eine Sekunde",
+        "ru": "Твоя анимация почти готова, конвертирую голос, секунду"
+    },
+    "failed_audio_convertion": {
+        "en": "Failed to change the voice, sorry, here is your animation with original voice",
+        "de": "Ich konnte die Stimme nicht ändern, tut mir leid. Hier ist deine Animation mit der Originalstimme",
+        "ru": "Не удалось изменить голос, извини, вот анимация с оригинальным голосом"
+    },
+    "orig": {
+        "en": "Original voice",
+        "de": "Originalstimme",
+        "ru": "Голос оригинала"
+    },
+    "female": {
+        "en": "Female",
+        "de": "Weiblich",
+        "ru": "Женский"
+    },
+    "male": {
+        "en": "Male",
+        "de": "Männlich",
+        "ru": "Мужской"
+    },
+    "custom": {
+        "en": "Customized voice",
+        "de": "Benutzerdefinierte Stimme",
+        "ru": "Пользовательский"
+    },
     "unsupported_file_type": {
         "en": "I can't process this format, try sending another file or /cancel.",
         "de": "Ich kann dieses Format nicht verarbeiten, versuchen Sie, eine andere Datei zu senden oder /cancel.",

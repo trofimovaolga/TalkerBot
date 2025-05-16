@@ -5,11 +5,11 @@ This is a Telegram bot that allows users to generate animated face videos using 
 ## Key Features ✨
 
 - Animates photo based on the movement and speach in the driving video
-- Uses driving video's voice
+- Users can keep original driving video's voice or set different voice for the animations 
 - Multi-Language Support: Allows users to interact with the bot in their preferred language (currently supports English, German and Russian).
 - Allowlist System: Only allows access to the bot for users authorized by admin.
 
-⚠️ Note: The facial animation technology is powered by [LivePortrait](https://github.com/KwaiVGI/LivePortrait). This bot only wraps that functionality into a user-friendly Telegram interface.
+⚠️ Note: The facial animation technology is powered by [LivePortrait](https://github.com/KwaiVGI/LivePortrait). Voice conversion technology is  powered by [TTS](https://github.com/coqui-ai/TTS). This bot only wraps that functionality into a user-friendly Telegram interface.
 
 ---
 
@@ -17,6 +17,7 @@ This is a Telegram bot that allows users to generate animated face videos using 
 
 ![demo](./demo.gif)
 
+- [optional] Users call `/set_voice` command to set a certain voice for animations (original, male, female or custom)
 - Users upload a photo (`.jpg`, `.png`, etc.)
 - Bot asks for a driving video
 - Users upload a video (`.mp4` or a round video note)
@@ -55,6 +56,8 @@ This is a Telegram bot that allows users to generate animated face videos using 
 |----------------        |--------------------------------------      |
 | `/start`               | Starts a new conversation                  |
 | `/set_lang`            | Set a conversation language                |
+| `/set_voice`           | Set a default voice for animations         |
+| `/upload_voice`        | Upload a custom voice for animations       |
 | `/cancel`              | Cancel current operation                   |
 | `/add_admin <username>`| Add an admin user (admin-only)             |
 | `/add_user <username>` | Add a regular user (admin-only)            |
